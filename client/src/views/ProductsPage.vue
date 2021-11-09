@@ -1,10 +1,26 @@
 <template>
-  <h1>The Products Page</h1>
+  <div id="page-wrap">
+    <div class="grid-wrap">
+      <div :key="product.id" v-for="product in products" class="product-item">
+        <img :src="product.imageUrl" alt="product" />
+        <h3 class="product-name">{{ product.name }}</h3>
+        <p class="product-price">${{ product.price }}</p>
+        <router-link :to="'/products/' + product.id">
+          <button>View Details</button>
+        </router-link>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script>
+import { products } from "../fake-data";
+
 export default {
   name: "ProductsPage",
+  data() {
+    return { products };
+  },
 };
 </script>
 
@@ -19,6 +35,13 @@ export default {
   padding: 20px;
   position: relative;
   width: 32%;
+}
+
+.grid-wrap {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin-top: 16px;
 }
 
 .product-name {
